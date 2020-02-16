@@ -206,12 +206,12 @@ if __name__ == "__main__":
             id_h = value['HUSB']
             id_w = value['WIFE']
             """ husband id and wife id """
-            if id_h != 'N/A':
+            if id_h not in ['N/A', '']:
                 name_h = indi[id_h]['NAME']
             else:
                 name_h = 'N/A'
             """ get husband's name"""
-            if id_w != 'N/A':
+            if id_w not in['N/A', '']:
                 name_w = indi[id_w]['NAME']
             else:
                 name_w = 'N/A'
