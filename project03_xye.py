@@ -45,7 +45,6 @@ def parse_GEDCOM(path):
             feat_FAM = defaultdict(lambda: 'N/A')
             """ 
             feat_IND, feat_FAM are defaultdict, the default value is 'N/A'
-            when some data are missing, it shows 'N/A'
             used to record characteristics of INDI and FAM excepting ID
             """
 
