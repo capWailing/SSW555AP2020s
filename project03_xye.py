@@ -169,7 +169,7 @@ def parse_GEDCOM(path):
                     child_s = set()
                     feat_FAM = defaultdict(lambda: 'N/A')
             
-            if len(dict_indi) < 5000 or len(dict_fam) < 1000:
+            if len(dict_indi) < 5000 and len(dict_fam) < 1000:
                 return dict_indi, dict_fam
             else:
                 raise ValueError(f"Data overflow")
