@@ -102,19 +102,26 @@ def parse_GEDCOM(path):
                         date_b = 1
                     elif tag == 'MARR':
                         date_b = 2
-                    elif date_b == 1 and tag == 'DATE':
-                        """ date_b == 1 which means it is birth date """    
-                        list.append(['BIRTH', argument])    
+                    elif date_b == 1:
+                        if tag == 'DATE':
+                            """ date_b == 1 which means it is birth date """    
+                            list.append(['BIRTH', argument])        
+                        else:
+                            list.append(['BIRTH', ''])
+                            list.append([tag, argument])
                         date_b = 0
-                    elif date_b == 2 and tag == 'DATE':
-                        """ date_b == 2 which means it is married date"""
-                        list.append(['MARR', argument])
+                    elif date_b == 2:
+                        if tag == 'DATE':
+                            """ date_b == 2 which means it is married date"""
+                            list.append(['MARR', argument])    
+                        else:
+                            list.append(['MARR', ''])
+                            list.append([tag, argument])
                         date_b = 0
                     else:
                         list.append([tag, argument])
                         date_b = 0
                     
-
             if level != '0':
                 """ 
                 whis situation is INDI or FAM ends without accompanying level 0
@@ -191,7 +198,7 @@ if __name__ == "__main__":
         table_fam = PrettyTable(['ID', 'Married', 'Divorced', 'Husband ID',
                                  'Husband Name', 'Wife ID', 'Wife Name', 'Children'])
 
-        for key, value in indi.items():             
+        for key, value in indi.items():            
             if value['DEAT'] == 'N/A':
                 alive = 'TRUE'
             else:
