@@ -15,7 +15,7 @@ def parse_GEDCOM(path):
     try:
         fp = open(path, 'r')
     except FileNotFoundError:
-        return (f"can not open this path")
+        raise FileNotFoundError(f"can not open this path")
     else:
         with fp:
 
@@ -168,44 +168,53 @@ def parse_GEDCOM(path):
                     """ put feat_FAM into the result dictionary dict_fam """
                     child_s = set()
                     feat_FAM = defaultdict(lambda: 'N/A')
-
-            return dict_indi, dict_fam
+            
+            if len(dict_indi) < 5000 or len(dict_fam) < 1000:
+                return dict_indi, dict_fam
+            else:
+                raise ValueError(f"Data overflow")
 
 
 if __name__ == "__main__":
     """ main() function: input path, print two tables"""
 
     path = input("please input the .ged file path:")
-    indi, fam = parse_GEDCOM(path)
-    table_indi = PrettyTable(
-        ['ID', 'Name', 'Gender', 'Birthday', 'Alive', 'Death', 'Child', 'Spouse'])
-    table_fam = PrettyTable(['ID', 'Married', 'Divorced', 'Husband ID',
-                             'Husband Name', 'Wife ID', 'Wife Name', 'Children'])
+    try:
+        indi, fam = parse_GEDCOM(path)
+    except FileNotFoundError as e:
+        print(e)
+    except ValueError as m:
+        print(m)
+    else:
+        table_indi = PrettyTable(
+            ['ID', 'Name', 'Gender', 'Birthday', 'Alive', 'Death', 'Child', 'Spouse'])
+        table_fam = PrettyTable(['ID', 'Married', 'Divorced', 'Husband ID',
+                                 'Husband Name', 'Wife ID', 'Wife Name', 'Children'])
 
-    for key, value in indi.items():
-        if value['DEAT'] == 'N/A':
-            alive = 'TRUE'
-        else:
-            alive = 'FALSE'
-        table_indi.add_row([key, value['NAME'], value['SEX'], value['BIRTH'],
-                            alive, value['DATE'], value['FAMC'], value['FAMS']])
+        for key, value in indi.items():
+            if value['DEAT'] == 'N/A':
+                alive = 'TRUE'
+            else:
+                alive = 'FALSE'
+            table_indi.add_row([key, value['NAME'], value['SEX'], value['BIRTH'],
+                                alive, value['DATE'], value['FAMC'], value['FAMS']])
 
-    for key, value in fam.items():
-        id_h = value['HUSB']
-        id_w = value['WIFE']
-        """ husband id and wife id """
-        if id_h != 'N/A':
-            name_h = indi[id_h]['NAME']
-        else:
-            name_h = 'N/A'
-        """ get husband's name"""
-        if id_w != 'N/A':
-            name_w = indi[id_w]['NAME']
-        else:
-            name_w = 'N/A'
-        """ get wife's name"""
-        table_fam.add_row([key, value['MARR'], value['DATE'],
-                           id_h, name_h, id_w, name_w, value['CHIL']])
+        for key, value in fam.items():
+            id_h = value['HUSB']
+            id_w = value['WIFE']
+            """ husband id and wife id """
+            if id_h != 'N/A':
+                name_h = indi[id_h]['NAME']
+            else:
+                name_h = 'N/A'
+            """ get husband's name"""
+            if id_w != 'N/A':
+                name_w = indi[id_w]['NAME']
+            else:
+                name_w = 'N/A'
+            """ get wife's name"""
+            table_fam.add_row([key, value['MARR'], value['DATE'],
+                               id_h, name_h, id_w, name_w, value['CHIL']])
 
-    print(table_indi)
-    print(table_fam)
+        print(table_indi)
+        print(table_fam)
