@@ -98,26 +98,22 @@ def parse_GEDCOM(path):
                     tag = list_line[1]
                     del list_line[0: 2]
                     argument = ' '.join(list_line)
-
                     if tag == 'BIRT':
                         date_b = 1
                     elif tag == 'MARR':
                         date_b = 2
-
-                    elif date_b == 1:
-                        """ date_b == 1 which means it is birth date """
-                        if tag == 'DATE':
-                            list.append(['BIRTH', argument])
+                    elif date_b == 1 and tag == 'DATE':
+                        """ date_b == 1 which means it is birth date """    
+                        list.append(['BIRTH', argument])    
                         date_b = 0
-
-                    elif date_b == 2:
+                    elif date_b == 2 and tag == 'DATE':
                         """ date_b == 2 which means it is married date"""
-                        if tag == 'DATE':
-                            list.append(['MARR', argument])
+                        list.append(['MARR', argument])
                         date_b = 0
-
                     else:
                         list.append([tag, argument])
+                        date_b = 0
+                    
 
             if level != '0':
                 """ 
@@ -175,8 +171,11 @@ def parse_GEDCOM(path):
 
 
 if __name__ == "__main__":
-    """ main() function: input path, print two tables"""
-
+    """ 
+    main() function: input path, print two tables
+    if data record doesn't appear, it will display 'N/A' in table
+    if 'DEAT' record lost, it will display 'lost' in 'DEAT' and alive is 'FALSE'
+    """
     path = input("please input the .ged file path:")
     try:
         indi, fam = parse_GEDCOM(path)
@@ -190,11 +189,16 @@ if __name__ == "__main__":
         table_fam = PrettyTable(['ID', 'Married', 'Divorced', 'Husband ID',
                                  'Husband Name', 'Wife ID', 'Wife Name', 'Children'])
 
-        for key, value in indi.items():
+        for key, value in indi.items():             
             if value['DEAT'] == 'N/A':
                 alive = 'TRUE'
             else:
-                alive = 'FALSE'
+                if value['DATE'] not in ['', 'N/A']:
+                    alive = 'FALSE'
+                else:   
+                    alive = 'FALSE'
+                    value['DATE'] = 'lost'
+                
             table_indi.add_row([key, value['NAME'], value['SEX'], value['BIRTH'],
                                 alive, value['DATE'], value['FAMC'], value['FAMS']])
 
