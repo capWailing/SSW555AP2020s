@@ -173,8 +173,10 @@ def parse_GEDCOM(path):
 if __name__ == "__main__":
     """ 
     main() function: input path, print two tables
-    if data record doesn't appear, it will display 'N/A' in table
+    if data lost except 'DEAT', 'DIV', it will display ' ' in table
     if 'DEAT' record lost, it will display 'lost' in 'DEAT' and alive is 'FALSE'
+    if 'DIV' record lost, it will display 'lost' in 'DIV'
+    if no record of items, it will display'N/A'
     """
     path = input("please input the .ged file path:")
     try:
@@ -216,6 +218,15 @@ if __name__ == "__main__":
             else:
                 name_w = 'N/A'
             """ get wife's name"""
+
+            if value['DIV'] == 'N/A':
+                value['DATE'] = 'N/A'
+            elif value['DATE'] in ['', 'N/A']:
+                value['DATE'] = 'lost'
+            """ 
+            if div record lost, print'lost'
+            if no divorce, print'N/A
+            """
             table_fam.add_row([key, value['MARR'], value['DATE'],
                                id_h, name_h, id_w, name_w, value['CHIL']])
 
