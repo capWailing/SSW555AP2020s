@@ -27,7 +27,8 @@ def US02(indi, fam):
             
         if h_birth_date >= marriage_date:
             print(f"Error: FAMILY: US02 birth before marriage：{id_h}: {h_birth_date} isn't before {marriage_date}") 
-        elif w_birth_date >= marriage_date:
+        
+        if w_birth_date >= marriage_date:
             print(f"Error: FAMILY: US02 birth before marriage：{id_w}: {w_birth_date} isn't before {marriage_date}") 
         else:
             continue
