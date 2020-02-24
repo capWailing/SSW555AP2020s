@@ -26,10 +26,10 @@ def US02(indi, fam):
             raise ValueError(f"Lost: {key} family wife id lost")       
             
         if h_birth_date >= marriage_date:
-            print(f"Error: FAMILY: US02 birth before marriage：{id_h}: {h_birth_date} isn't before {marriage_date}") 
+            print(f"Error: FAMILY: US02 birth before marriage：{id_h}: {birth_h} isn't before {value['MARR']}") 
         
         if w_birth_date >= marriage_date:
-            print(f"Error: FAMILY: US02 birth before marriage：{id_w}: {w_birth_date} isn't before {marriage_date}") 
+            print(f"Error: FAMILY: US02 birth before marriage：{id_w}: {birth_w} isn't before {value['MARR']}") 
         else:
             continue
 
@@ -52,6 +52,6 @@ def US03(indi):
                 raise ValueError(f"Lost: {key} birth data lost")
 
             if birth_date >= death_date:
-                print(f"Error: INDIVITUAL: US03 birth before death：{key}: {birth_date} isn't before {death_date}") 
+                print(f"Error: INDIVITUAL: US03 birth before death：{key}: {birth} isn't before {death}") 
             else:
                 continue

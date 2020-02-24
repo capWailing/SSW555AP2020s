@@ -246,4 +246,3 @@ if __name__ == "__main__":
             US0203_xye.US03(indi)
         except ValueError as e:
             print(e)
-        
