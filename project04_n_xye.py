@@ -6,7 +6,7 @@ Date: 02.27.2020
 from prettytable import PrettyTable
 from collections import defaultdict
 import US0203_xye
-import US12
+
 
 def parse_GEDCOM(path):
     """ 
