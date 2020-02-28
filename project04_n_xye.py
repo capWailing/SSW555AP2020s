@@ -6,7 +6,7 @@ Date: 02.27.2020
 from prettytable import PrettyTable
 from collections import defaultdict
 import US0203_xye
-
+import US12
 
 def parse_GEDCOM(path):
     """ 
@@ -145,16 +145,16 @@ def parse_GEDCOM(path):
                     
                     for q in item:
                         if q[0] == 'FAMC':
-                            famc = [q[1], q[2]]
-                            famc_s.append(famc)
+                            
+                            famc_s.append([q[1], q[2]])
 
                             feat_IND['FAMC'] = famc_s
                             """ 
                             collect famc in indi level and put them into famc_s set
                             """
                         elif q[0] == 'FAMS':
-                            fams = [q[1], q[2]]
-                            fams_s.append(fams)
+                            
+                            fams_s.append([q[1], q[2]])
                             feat_IND['FAMS'] = fams_s
                             """
                             collect fams in indi level and put them into fams_s set
@@ -173,8 +173,8 @@ def parse_GEDCOM(path):
                     n = item.pop(0)
                     for q in item:
                         if q[0] == 'CHIL':
-                            chil = [q[1], q[2]]
-                            child_s.append(chil)
+                            
+                            child_s.append([q[1], q[2]])
                             feat_FAM['CHIL'] = child_s
                             """
                             collect children in fam level and put them into child_s set
@@ -207,7 +207,7 @@ if __name__ == "__main__":
     except ValueError as m:
         print(m)
     else:
-        print(indi)
+        
         table_indi = PrettyTable(
             ['ID', 'Name', 'Gender', 'Birthday', 'Alive', 'Death', 'Child', 'Spouse'])
         table_fam = PrettyTable(['ID', 'Married', 'Divorced', 'Husband ID',
@@ -217,7 +217,11 @@ if __name__ == "__main__":
         l_CHIL = []
         DATE_DEATH = 'N/A'
         DATE_DIV = 'N/A'
-        for key, value in indi.items():            
+        famc = 'N/A'
+        fams = 'N/A'
+        chil = 'N/A'
+        
+        for key, value in indi.items():          
             if value['DEAT'] == 'N/A':
                 alive = 'TRUE'
             else:
@@ -229,21 +233,21 @@ if __name__ == "__main__":
                     DATE_DEATH = ''
             
             if value['FAMC'] == 'N/A':
-                value['FAMC'] == 'N/A'
+                famc = 'N/A'
             else:    
                 for famc in value['FAMC']:
                     l_FAMC.append(famc[0])
-                value['FAMC'] = l_FAMC
+                famc = l_FAMC
             
             if value['FAMS'] == 'N/A':
-                value['FAMS'] == 'N/A'
+                fams = 'N/A'
             else:
                 for fams in value['FAMS']:
                     l_FAMS.append(fams[0]) 
-                value['FAMS'] = l_FAMS
+                fams = l_FAMS
             
             table_indi.add_row([key, value['NAME'][0], value['SEX'][0], value['BIRTH'][0],
-                                alive, DATE_DEATH, value['FAMC'], value['FAMS']])
+                                alive, DATE_DEATH, famc, fams])
             l_FAMC = []
             l_FAMS = []
 
@@ -276,13 +280,13 @@ if __name__ == "__main__":
             """
             
             if value['CHIL'] == 'N/A':
-                value['CHIL'] == 'N/A'
+                chil = 'N/A'
             else:
                 for chil in value['CHIL']:
                     l_CHIL.append(chil[0]) 
-                value['CHIL'] = l_CHIL
+                chil = l_CHIL
             table_fam.add_row([key, value['MARR'][0], DATE_DIV,
-                               id_h, name_h, id_w, name_w, value['CHIL']])
+                               id_h, name_h, id_w, name_w, chil])
         
             l_CHIL = []
         
@@ -298,4 +302,7 @@ if __name__ == "__main__":
         except ValueError as e:
             print(e)
 
-        
+        try:
+            US12.US12(indi, fam)
+        except ValueError as e:
+            print(e)
