@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from project04_n_xye import parse_GEDCOM
+from Project04_xye import parse_GEDCOM
 from US0203_xye import US02, US03
 
 class Test(unittest.TestCase):   
