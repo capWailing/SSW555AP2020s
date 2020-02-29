@@ -6,7 +6,7 @@ Date: 02.27.2020
 from prettytable import PrettyTable
 from collections import defaultdict
 import US0203_xye
-import US12
+
 
 def parse_GEDCOM(path):
     """ 
@@ -303,7 +303,3 @@ if __name__ == "__main__":
         except ValueError as e:
             print(e)
 
-        try:
-            US12.US12(indi, fam)
-        except ValueError as e:
-            print(e)
