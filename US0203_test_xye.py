@@ -16,6 +16,6 @@ class Test(unittest.TestCase):
         with patch('builtins.print') as mocked_print:
             US03(m)
             mocked_print.assert_called_with("Error: INDIVITUAL: US03 birth before death：line 5 and 9: I01: 15 JUL 1985 isn't before 15 JUL 1984")
-         
+       
 if __name__ == "__main__":
     unittest.main(exit=False, verbosity=2)
