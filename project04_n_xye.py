@@ -215,17 +215,16 @@ if __name__ == "__main__":
         l_FAMC = []
         l_FAMS = []
         l_CHIL = []
-        DATE_DEATH = 'N/A'
-        DATE_DIV = 'N/A'
         famc = 'N/A'
         fams = 'N/A'
         chil = 'N/A'
         
-        for key, value in indi.items():          
+        for key, value in indi.items():  
+            DATE_DEATH = 'N/A'       
             if value['DEAT'] == 'N/A':
                 alive = 'TRUE'
             else:
-                if value['DATE'][0] not in ['', 'N/A']:
+                if value['DATE'][0] not in ['', 'N']:
                     alive = 'FALSE'
                     DATE_DEATH = value['DATE'][0]
                 else:   
@@ -252,6 +251,8 @@ if __name__ == "__main__":
             l_FAMS = []
 
         for key, value in fam.items():
+
+            DATE_DIV = 'N/A' 
             id_h = value['HUSB'][0]
             id_w = value['WIFE'][0]
             """ husband id and wife id """
@@ -270,7 +271,7 @@ if __name__ == "__main__":
                 
                 DATE_DIV = 'N/A'
             else:
-                if value['DATE'][0] in ['', 'N/A']:
+                if value['DATE'][0] in ['', 'N']:
                     DATE_DIV = ''
                 else:
                     DATE_DIV = value['DATE'][0]
