@@ -193,8 +193,7 @@ def parse_GEDCOM(path):
                     l_child = value['CHIL']
                     id_wife = value['WIFE'][0]
                     id_hus = value['HUSB'][0] 
-                    for key1, value1 in dict_fam.items():
-                        
+                    for key1, value1 in dict_fam.items(): 
                         if value['HUSB'][0] == id_hus or value['WIFE'][0] == id_wife:
                             for item in l_child:
                                 if item not in value1['CHIL']:
@@ -204,10 +203,8 @@ def parse_GEDCOM(path):
                                     continue
 
             for key2, value2 in dict_indi.items():
-                
                 if value2['DATE'] != 'N/A' :
-                    id_death = key2
-                    
+                    id_death = key2 
                     for key3, value3 in dict_fam.items():
                         if id_death == value3['HUSB'][0]:
                             if value3['CHIL'] != 'N/A':   
@@ -326,7 +323,6 @@ if __name__ == "__main__":
             if div record lost, print''
             if no divorce, print'N/A'
             """
-            
             if value['CHIL'] == 'N/A':
                 chil = 'N/A'
             else:
