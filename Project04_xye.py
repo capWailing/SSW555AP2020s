@@ -1,6 +1,6 @@
 """
 project04
-Author:Xinyi Ye
+Author:Xinyi Ye, Boyu Wang
 Date: 02.27.2020
 """
 from prettytable import PrettyTable
@@ -146,16 +146,16 @@ def parse_GEDCOM(path):
                     
                     for q in item:
                         if q[0] == 'FAMC':
-                            famc = [q[1], q[2]]
-                            famc_s.append(famc)
+                            
+                            famc_s.append([q[1], q[2]])
 
                             feat_IND['FAMC'] = famc_s
                             """ 
                             collect famc in indi level and put them into famc_s set
                             """
                         elif q[0] == 'FAMS':
-                            fams = [q[1], q[2]]
-                            fams_s.append(fams)
+                            
+                            fams_s.append([q[1], q[2]])
                             feat_IND['FAMS'] = fams_s
                             """
                             collect fams in indi level and put them into fams_s set
@@ -174,8 +174,8 @@ def parse_GEDCOM(path):
                     n = item.pop(0)
                     for q in item:
                         if q[0] == 'CHIL':
-                            chil = [q[1], q[2]]
-                            child_s.append(chil)
+                            
+                            child_s.append([q[1], q[2]])
                             feat_FAM['CHIL'] = child_s
                             """
                             collect children in fam level and put them into child_s set
@@ -188,6 +188,49 @@ def parse_GEDCOM(path):
                     child_s = []
                     feat_FAM = defaultdict(lambda: 'N/A')
             
+            
+            for key, value in dict_fam.items():
+                if value['DATE'] != 'N/A':
+                    l_child = value['CHIL']
+                    id_wife = value['WIFE'][0]
+                    id_hus = value['HUSB'][0] 
+                    for key1, value1 in dict_fam.items():
+                        if value['HUSB'][0] == id_hus or value['WIFE'][0] == id_wife:
+                            for item in l_child:
+                                if item[0] not in value1['CHIL'][0]:
+                                    value1['CHIL'].append(item)
+                                    dict_fam[key1]['CHIL'] = value1['CHIL']
+                                else:
+                                    continue
+
+            for key2, value2 in dict_indi.items():
+                if value2['DATE'] != 'N/A':
+                    id_death = key2
+                    for key3, value3 in dict_fam.items():
+                        if id_death == value3['HUSB'][0]:
+                            if value3['CHIL'] != 'N/A':   
+                                child_d = value3['CHIL']
+                                spouse_d = value3['WIFE'][0]
+                            else:
+                                continue
+                        elif id_death == value3['WIFE'][0]:
+                            if value3['CHIL'] != 'N/A':   
+                                child_d = value3['CHIL']
+                                spouse_d = value3['HUSB'][0]
+                            else:
+                                continue
+                        else:
+                            continue
+                    for key4, value4 in dict_fam.items():
+                        if spouse_d in [value4['HUSB'][0], value4['WIFE'][0]]:
+                            for item in child_d :
+                                for item1 in value4['CHIL']:
+                                    if item[0] != item1[0]:
+                                        value4['CHIL'].append(item)
+                                        dict_fam[key4]['CHIL'] = value4['CHIL']
+                                    else:
+                                        continue
+                                        
             if len(dict_indi) < 5000 and len(dict_fam) < 1000:
                 return dict_indi, dict_fam
             else:
@@ -216,15 +259,16 @@ if __name__ == "__main__":
         l_FAMC = []
         l_FAMS = []
         l_CHIL = []
+        famc = 'N/A'
+        fams = 'N/A'
+        chil = 'N/A'
         
-      
         for key, value in indi.items():  
-            DATE_DIV = 'N/A'
             DATE_DEATH = 'N/A'       
             if value['DEAT'] == 'N/A':
                 alive = 'TRUE'
             else:
-                if value['DATE'][0] not in ['', 'N/A','N']:
+                if value['DATE'][0] not in ['', 'N']:
                     alive = 'FALSE'
                     DATE_DEATH = value['DATE'][0]
                 else:   
@@ -232,44 +276,43 @@ if __name__ == "__main__":
                     DATE_DEATH = ''
             
             if value['FAMC'] == 'N/A':
-                value['FAMC'] == 'N/A'
+                famc = 'N/A'
             else:    
                 for famc in value['FAMC']:
                     l_FAMC.append(famc[0])
-                value['FAMC'] = l_FAMC
+                famc = l_FAMC
             
             if value['FAMS'] == 'N/A':
-                value['FAMS'] == 'N/A'
+                fams = 'N/A'
             else:
                 for fams in value['FAMS']:
                     l_FAMS.append(fams[0]) 
-                value['FAMS'] = l_FAMS
+                fams = l_FAMS
             
             table_indi.add_row([key, value['NAME'][0], value['SEX'][0], value['BIRTH'][0],
-                                alive, DATE_DEATH, value['FAMC'], value['FAMS']])
+                                alive, DATE_DEATH, famc, fams])
             l_FAMC = []
             l_FAMS = []
 
         for key, value in fam.items():
+            DATE_DIV = 'N/A' 
             id_h = value['HUSB'][0]
             id_w = value['WIFE'][0]
             """ husband id and wife id """
-            if id_h not in ['N/A', '']:
+            if id_h not in ['N', '']:
                 name_h = indi[id_h]['NAME'][0]
             else:
                 name_h = 'N/A'
             """ get husband's name"""
-            if id_w not in['N/A', '']:
+            if id_w not in['N', '']:
                 name_w = indi[id_w]['NAME'][0]
             else:
                 name_w = 'N/A'
             """ get wife's name"""
-
-            if value['DIV'] == 'N/A':
-                
+            if value['DIV'] == 'N/A':     
                 DATE_DIV = 'N/A'
             else:
-                if value['DATE'][0] in ['', 'N/A']:
+                if value['DATE'][0] in ['', 'N']:
                     DATE_DIV = ''
                 else:
                     DATE_DIV = value['DATE'][0]
@@ -277,15 +320,14 @@ if __name__ == "__main__":
             if div record lost, print''
             if no divorce, print'N/A'
             """
-            
             if value['CHIL'] == 'N/A':
-                value['CHIL'] == 'N/A'
+                chil = 'N/A'
             else:
                 for chil in value['CHIL']:
                     l_CHIL.append(chil[0]) 
-                value['CHIL'] = l_CHIL
+                chil = l_CHIL
             table_fam.add_row([key, value['MARR'][0], DATE_DIV,
-                               id_h, name_h, id_w, name_w, value['CHIL']])
+                               id_h, name_h, id_w, name_w, chil])
         
             l_CHIL = []
         
@@ -301,7 +343,6 @@ if __name__ == "__main__":
         except ValueError as e:
             print(e)
 
-        
         try:
             US0106_wby.US01(indi, fam)
         except ValueError as e:
