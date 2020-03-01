@@ -189,47 +189,57 @@ def parse_GEDCOM(path):
                     feat_FAM = defaultdict(lambda: 'N/A')
             
             for key, value in dict_fam.items():
+                l_item1 = []   
                 if value['DATE'] != 'N/A':
                     l_child = value['CHIL']
                     id_wife = value['WIFE'][0]
                     id_hus = value['HUSB'][0] 
-                    for key1, value1 in dict_fam.items(): 
-                        if value['HUSB'][0] == id_hus or value['WIFE'][0] == id_wife:
-                            for item in l_child:
-                                if item not in value1['CHIL']:
-                                    value1['CHIL'].append(item)
-                                    dict_fam[key1]['CHIL'] = value1['CHIL']
-                                else:
-                                    continue
+                    fam_key = key
+                    
+                    for key1, value1 in dict_fam.items():
+                        if value1['HUSB'][0] == id_hus or value1['WIFE'][0] == id_wife:
+                            if key1 != fam_key:
+                                for item1 in value1['CHIL']:
+                                    l_item1.append(item1[0]) 
+                                for item in l_child:
+                                    if item[0] not in l_item1:
+                                        value1['CHIL'].append(item)
+                                    else:
+                                        continue
+                                dict_fam[key1]['CHIL'] = value1['CHIL']
 
             for key2, value2 in dict_indi.items():
+                l_item2 = []
                 if value2['DATE'] != 'N/A' :
                     id_death = key2 
-                    for key3, value3 in dict_fam.items():
-                        if id_death == value3['HUSB'][0]:
-                            if value3['CHIL'] != 'N/A':   
-                                child_d = value3['CHIL']
-                                spouse_d = value3['WIFE'][0]
-                            else:
-                                continue
-                        elif id_death == value3['WIFE'][0]:
-                            if value3['CHIL'] != 'N/A':   
-                                child_d = value3['CHIL']
-                                spouse_d = value3['HUSB'][0]
-                            else:
-                                continue
-                        else:
-                            continue
-                    for key4, value4 in dict_fam.items():
-                        if spouse_d in [value4['HUSB'][0], value4['WIFE'][0]]:
-                            for item in child_d :
-                                    if item not in value4['CHIL']:
-                                        value4['CHIL'].append(item)
-                                        dict_fam[key4]['CHIL'] = value4['CHIL']
-                                    else:
-                                       continue
+                    for fam in value2['FAMS']:
+                        key_fam = fam[0]
+                        child = dict_fam[key_fam]['CHIL']
+                        for key4, value4 in dict_fam.items():
+                            if id_death == dict_fam[key_fam]['HUSB'][0]:
+                                if dict_fam[key_fam]['WIFE'][0] in [value4['HUSB'][0], value4['WIFE'][0]] and key4 != key_fam:
+                                    for item1 in value4['CHIL']:
+                                        l_item2.append(item1[0])
+                                    for item in child :
+                                        if item[0] not in l_item2:
+                                            value4['CHIL'].append(item)
+                                        else:
+                                            continue
+                                    dict_fam[key4]['CHIL'] = value4['CHIL']
+
+                            elif id_death == dict_fam[key_fam]['WIFE']:
+                               
+                                if dict_fam[key_fam]['HUSB'][0] in [value4['HUSB'][0], value4['WIFE'][0]] and key4 != key_fam:
+                                    for item1 in value4['CHIL']:
+                                        l_item2.append(item1[0])
+                                    for item in child :
+                                        if item[0] not in l_item2:
+                                            value4['CHIL'].append(item)
+                                        else:
+                                            continue
+                                    dict_fam[key4]['CHIL'] = value4['CHIL']
                 else:
-                    continue
+                    continue  
             
             if len(dict_indi) < 5000 and len(dict_fam) < 1000:
                 return dict_indi, dict_fam
@@ -323,6 +333,7 @@ if __name__ == "__main__":
             if div record lost, print''
             if no divorce, print'N/A'
             """
+            
             if value['CHIL'] == 'N/A':
                 chil = 'N/A'
             else:
