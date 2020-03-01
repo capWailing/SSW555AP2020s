@@ -8,11 +8,8 @@ from collections import defaultdict
 import US0203_xye
 import US0106_wby
 import US0405_ZH
-<<<<<<< HEAD
 
-=======
 import us0809_child_birth
->>>>>>> 61c8e0932453defba205df9bfb4bec6a96ca5cef
 
 def parse_GEDCOM(path):
     """ 
@@ -378,13 +375,10 @@ if __name__ == "__main__":
         try:
             US0405_ZH.US05(indi, fam)
         except ValueError as e:
-<<<<<<< HEAD
-            print(e)
-=======
             print(e)
 
         try:
-            us0809_child_birth.birth_before_marriage(indi, fam)
+            us0809_child_birth.birth_before_marriage(indi,fam)
         except ValueError as e:
             print(e)
->>>>>>> 61c8e0932453defba205df9bfb4bec6a96ca5cef
+        

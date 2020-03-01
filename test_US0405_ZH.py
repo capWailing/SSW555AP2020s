@@ -1,16 +1,12 @@
 import unittest
 from unittest.mock import patch
 from Project04_xye import parse_GEDCOM
-<<<<<<< HEAD
 from US0405_ZH import US04, US05
-=======
-from US0405_ZH import USO4, US05
->>>>>>> 61c8e0932453defba205df9bfb4bec6a96ca5cef
 
 
 class Test(unittest.TestCase):
     def test_US04(self):
-        m, n = parse_GEDCOM('test0405.ged')
+        m, n = parse_GEDCOM('test_US0405.ged')
         with patch('builtins.print') as mock_print:
             US04(n)
             mock_print.assert_call_with('Error: FAMILY: US04: 55: F1: Divorced 18 May 1888 before married 17 FEB 1966')

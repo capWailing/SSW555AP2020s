@@ -11,7 +11,7 @@ class Test(unittest.TestCase):
         with patch('builtins.print') as mocked_print:
             birth_before_marriage(m, n)
             mocked_print.assert_called_with(
-                "ANOMALY: FAMILY: US08: 20: @F3@: Child @I3@ born 1973-07-10 00:00:00 after divorce on 1970-05-11 00:00:00")
+                "ANOMALY: FAMILY: US08: 13: @F4@: Child @I2@ born 1970-05-13 00:00:00 before marriage on 1977-11-15 00:00:00")
 
 
 
