@@ -7,6 +7,7 @@ from prettytable import PrettyTable
 from collections import defaultdict
 import US0203_xye
 import US0106_wby
+import US0405_ZH
 
 
 def parse_GEDCOM(path):
@@ -363,5 +364,14 @@ if __name__ == "__main__":
             print(e)
         try:
             US0106_wby.US06(indi, fam)
+        except ValueError as e:
+            print(e)
+
+        try:
+            US0405_ZH.US04(fam)
+        except ValueError as e:
+            print(e)
+        try:
+            US0405_ZH.US05(indi, fam)
         except ValueError as e:
             print(e)

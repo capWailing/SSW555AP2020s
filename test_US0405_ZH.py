@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
-from project04_n_xye import parse_GEDCOM
-from US0405_ZH import USO4, US05
+from Project04_xye import parse_GEDCOM
+from US0405_ZH import US04, US05
 
 
 class Test(unittest.TestCase):
