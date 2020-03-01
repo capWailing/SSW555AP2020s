@@ -8,6 +8,7 @@ from collections import defaultdict
 import US0203_xye
 import US0106_wby
 import US0405_ZH
+import us0809_child_birth
 
 def parse_GEDCOM(path):
     """ 
@@ -372,5 +373,10 @@ if __name__ == "__main__":
             print(e)
         try:
             US0405_ZH.US05(indi, fam)
+        except ValueError as e:
+            print(e)
+
+        try:
+            us0809_child_birth
         except ValueError as e:
             print(e)
