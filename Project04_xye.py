@@ -384,7 +384,7 @@ if __name__ == "__main__":
             print(e)
 
         try:
-            us0809_child_birth
+            us0809_child_birth.birth_before_marriage(indi, fam)
         except ValueError as e:
             print(e)
 >>>>>>> 61c8e0932453defba205df9bfb4bec6a96ca5cef
