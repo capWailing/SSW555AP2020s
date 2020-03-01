@@ -10,9 +10,8 @@ def US04(fam):
 
     for key, value in fam.items():
 
-        div = value['DATA'][0]
-        mar = value['MARR'][0]
-
+        div = value['DATE']
+        mar = value['MARR']
         if div in ('N/A', ''):
             continue
 
@@ -21,10 +20,10 @@ def US04(fam):
                 raise ValueError(f"Lost:{value['ID']} family marriage date lost")
 
             else:
-                div_date = datetime.strptime(div, "%d %b %Y")
-                mar_date = datetime.strptime(mar, "%d %b %Y")
+                div_date = datetime.strptime(div[0], "%d %b %Y")
+                mar_date = datetime.strptime(mar[0], "%d %b %Y")
                 if div_date < mar_date:
-                    print(f"Error: FAMILY: US04 {value['DATA'][1]}: {key}: Divorced {div_date} before married {mar_date}")
+                    print(f"Error: FAMILY: US04: {value['DATE'][1]}: {key}: Divorced {div[0]} before married {mar[0]}")
 
 
 def US05(indi, fam):
@@ -37,18 +36,20 @@ def US05(indi, fam):
 
         else:
             mar_date = datetime.strptime(mar, "%d %b %Y")
-            hus_death = indi[value['HUBS'][0]]['DATE']
-            wif_death = indi[value['WIFE'][0]]['DATE']
+            hus_id = value['HUSB'][0]
+            wif_id = value['WIFE'][0]
+            hus_death = indi[hus_id]['DATE']
+            wif_death = indi[wif_id]['DATE']
 
             if hus_death not in ('N/A', ''):
-                hus_death_date = datetime.strptime(hus_death, "%d %b %Y")
+                hus_death_date = datetime.strptime(hus_death[0], "%d %b %Y")
                 if hus_death_date < mar_date:
-                    print(f"Error: US05; {value['MARR'][1]}: {key}: Married {mar_date} after husband's ({value['HUBS'][0]}) death on {hus_death_date}")
+                    print(f"Error: FAMILY: US05: {value['MARR'][1]}: {key}: Married {mar} after husband's ({hus_id}) death on {hus_death[0]}")
 
             elif wif_death not in ('N/A', ''):
-                wif_death_date = datetime.strptime(wif_death, "%d %b %Y")
+                wif_death_date = datetime.strptime(wif_death[0], "%d %b %Y")
                 if wif_death_date < mar_date:
-                    print(f"Error: US05: {value['MARR'][1]}: {key}: Married {mar_date} after wife's ({value['WIFE'][0]}) death on {wif_death_date}")
+                    print(f"Error: FAMILY: US05: {value['MARR'][1]}: {key}: Married {mar} after wife's ({wif_id}) death on {wif_death[0]}")
 
             else:
                 continue
