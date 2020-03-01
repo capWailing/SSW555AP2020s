@@ -59,7 +59,7 @@ def US06(indi,fam):
                 if husb_death<div_date:
                     print(f"ERROR: FAMILY: US06: {value['DATE'][1]}: {key}:hunsband's death date {husband_death} before divorce date {value['DATE'][0]}")
 
-            elif wife_death not in ['N/A','',"N"]:
+            if wife_death not in ['N/A','',"N"]:
                 wif_death=datetime.strptime(wife_death, "%d %b %Y")
                 if wif_death<div_date:
                     print(f"ERROR: FAMILY: US06: {value['DATE'][1]}: {key}:wife's death date {wife_death} before divorce date {value['DATE'][0]}")
