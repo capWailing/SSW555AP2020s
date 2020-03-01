@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from project04_n_xye import parse_GEDCOM
+from Project04_xye import parse_GEDCOM
 from US0405_ZH import USO4, US05
 
 
