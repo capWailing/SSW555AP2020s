@@ -208,7 +208,7 @@ if __name__ == "__main__":
     except ValueError as m:
         print(m)
     else:
-        print(indi)
+        
         table_indi = PrettyTable(
             ['ID', 'Name', 'Gender', 'Birthday', 'Alive', 'Death', 'Child', 'Spouse'])
         table_fam = PrettyTable(['ID', 'Married', 'Divorced', 'Husband ID',
