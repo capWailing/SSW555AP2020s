@@ -188,24 +188,26 @@ def parse_GEDCOM(path):
                     child_s = []
                     feat_FAM = defaultdict(lambda: 'N/A')
             
-            
             for key, value in dict_fam.items():
                 if value['DATE'] != 'N/A':
                     l_child = value['CHIL']
                     id_wife = value['WIFE'][0]
                     id_hus = value['HUSB'][0] 
                     for key1, value1 in dict_fam.items():
+                        
                         if value['HUSB'][0] == id_hus or value['WIFE'][0] == id_wife:
                             for item in l_child:
-                                if item[0] not in value1['CHIL'][0]:
+                                if item not in value1['CHIL']:
                                     value1['CHIL'].append(item)
                                     dict_fam[key1]['CHIL'] = value1['CHIL']
                                 else:
                                     continue
 
             for key2, value2 in dict_indi.items():
-                if value2['DATE'] != 'N/A':
+                
+                if value2['DATE'] != 'N/A' :
                     id_death = key2
+                    
                     for key3, value3 in dict_fam.items():
                         if id_death == value3['HUSB'][0]:
                             if value3['CHIL'] != 'N/A':   
@@ -224,13 +226,14 @@ def parse_GEDCOM(path):
                     for key4, value4 in dict_fam.items():
                         if spouse_d in [value4['HUSB'][0], value4['WIFE'][0]]:
                             for item in child_d :
-                                for item1 in value4['CHIL']:
-                                    if item[0] != item1[0]:
+                                    if item not in value4['CHIL']:
                                         value4['CHIL'].append(item)
                                         dict_fam[key4]['CHIL'] = value4['CHIL']
                                     else:
-                                        continue
-                                        
+                                       continue
+                else:
+                    continue
+            
             if len(dict_indi) < 5000 and len(dict_fam) < 1000:
                 return dict_indi, dict_fam
             else:
@@ -295,6 +298,7 @@ if __name__ == "__main__":
             l_FAMS = []
 
         for key, value in fam.items():
+
             DATE_DIV = 'N/A' 
             id_h = value['HUSB'][0]
             id_w = value['WIFE'][0]
@@ -309,7 +313,9 @@ if __name__ == "__main__":
             else:
                 name_w = 'N/A'
             """ get wife's name"""
-            if value['DIV'] == 'N/A':     
+
+            if value['DIV'] == 'N/A':
+                
                 DATE_DIV = 'N/A'
             else:
                 if value['DATE'][0] in ['', 'N']:
@@ -320,6 +326,7 @@ if __name__ == "__main__":
             if div record lost, print''
             if no divorce, print'N/A'
             """
+            
             if value['CHIL'] == 'N/A':
                 chil = 'N/A'
             else:
