@@ -192,7 +192,7 @@ def build_dictionary(sum):
 
     if len(dict_indi) < 5000 and len(dict_fam) < 1000:
         indi_list = build_individual(dict_indi)
-        fam_list = build_family(dict_fam)
+        fam_list = build_family(dict_fam, indi_list)
         verification(indi_list, fam_list)
         return dict_indi, dict_fam
     else:

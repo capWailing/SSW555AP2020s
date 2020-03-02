@@ -98,3 +98,8 @@ class Family:
         :return:
         """
         self.__error_list = error_list
+
+    def __str__(self):
+        return str({"FAM": self.__id, "MARR": self.__married, "DIV": self.__divorced,
+                    "HUSB": str(self.__husband[0]), "WIFE": str(self.__wife[0]),
+                    "CHIL": [str(child) for child in self.__children]})
