@@ -7,6 +7,7 @@ from collections import defaultdict
 
 from gedcom_app.control.build_entity import build_individual, build_family
 from gedcom_app.control.verification import verification
+from gedcom_app.view.output_prettytable import individual_table, family_table
 
 
 def parse_gedcom(path):
@@ -152,9 +153,9 @@ def build_dictionary(sum):
     for item in sum:
         if item[0][0] == 'INDI':
             feat_IND = defaultdict(lambda: 'N/A')
+            fams_s = []
+            famc_s = []
             for q in item:
-                famc_s = []
-                fams_s = []
                 if q[0] == 'FAMC':
 
                     famc_s.append((q[1], q[2]))
@@ -176,8 +177,8 @@ def build_dictionary(sum):
             """ put feat_IND into the result dictionary dict_indi """
         elif item[0][0] == 'FAM':
             feat_FAM = defaultdict(lambda: 'N/A')
+            child_s = []
             for q in item:
-                child_s = []
                 if q[0] == 'CHIL':
 
                     child_s.append((q[1], q[2]))
@@ -193,16 +194,17 @@ def build_dictionary(sum):
     if len(dict_indi) < 5000 and len(dict_fam) < 1000:
         indi_list = build_individual(dict_indi)
         fam_list = build_family(dict_fam, indi_list)
+        individual_table(indi_list)
+        family_table(fam_list)
         verification(indi_list, fam_list)
         return dict_indi, dict_fam
     else:
         raise ValueError(f"Data overflow")
 
-
-def main():
-    path = r"/Users/zituoyan/Documents/GitHub/SSW555AP2020s/test03.ged"
-    print(parse_gedcom(path))
-
-
-if __name__ == '__main__':
-    main()
+# def main():
+#     path = r"/Users/zituoyan/Documents/GitHub/SSW555AP2020s/test.ged"
+#     parse_gedcom(path)
+#
+#
+# if __name__ == '__main__':
+#     main()
