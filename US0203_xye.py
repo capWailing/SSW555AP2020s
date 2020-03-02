@@ -6,7 +6,7 @@ Date: 02/26/2020
 from datetime import datetime, timedelta
 
 def US02(indi, fam):
-        
+    """ US02: Birth before marriage """
     for key, value in fam.items():
            
         marriage_date = datetime.strptime(value['MARR'][0], "%d %b %Y")
@@ -39,7 +39,7 @@ def US02(indi, fam):
             continue
 
 def US03(indi):
-        
+    """ US03: Birth before death """ 
     for key, value in indi.items():
         birth = value['BIRTH']
         death = value['DATE']
