@@ -10,7 +10,7 @@ class Family:
         This is a class for describe family
     """
 
-    def __init__(self, fam_id, married, divorced, husband, wife, children):
+    def __init__(self, fam_id, married, divorced, husband, wife):
         """
             init family class
         :param fam_id: family id
@@ -18,14 +18,13 @@ class Family:
         :param divorced: divorced date or N/A if not divorced
         :param husband: husband instance from class indi
         :param wife: wife instance from class indi
-        :param children: children individual id list
         """
         self.__id = fam_id
         self.__married = married
         self.__divorced = divorced
         self.__husband = husband
         self.__wife = wife
-        self.__children = children
+        self.__children = []
         self.__error_list = []
 
     @property
@@ -75,6 +74,13 @@ class Family:
         :return: list of children id
         """
         return self.__children
+
+    @children.setter
+    def children(self, child):
+        """
+            add children
+        """
+        self.__children.append(child)
 
     @property
     def error_list(self):

@@ -3,6 +3,7 @@
     description: class for individuals
     date: 28/02/2020
 """
+from datetime import datetime, timedelta
 
 
 class Individual:
@@ -27,8 +28,14 @@ class Individual:
         self.__death = death
         self.__child = child
         self.__spouse = spouse
-        self.__alive = True
+        self.__alive = self.if_alive()
         self.__error_list = []
+
+    def if_alive(self):
+        if self.__death == "N/A":
+            return True
+        else:
+            return False
 
     @property
     def indi_id(self):
@@ -94,15 +101,6 @@ class Individual:
         """
         return self.__alive
 
-    @alive.setter
-    def alive(self, alive):
-        """
-            set the individual is alive or not
-        :param alive: True or False
-        :return:
-        """
-        self.__alive = alive
-
     @property
     def error_list(self):
         """
@@ -119,3 +117,8 @@ class Individual:
         :return:
         """
         self.__error_list = error_list
+
+    def __str__(self):
+        return str({"INDI": self.__indi_id, "NAME": self.__name, "SEX": self.__gender,
+                "BIRTH": self.__birthday, "DEAT": self.__death, "FAMC": self.__child,
+                "FAMS": self.__spouse})

@@ -5,8 +5,11 @@
 """
 from collections import defaultdict
 
+from gedcom_app.control.build_entity import build_individual, build_family
+from gedcom_app.control.verification import verification
 
-def parse_GEDCOM(path):
+
+def parse_gedcom(path):
     """
     parse_GEDCOM() funtion:
     parse .ged file to collect all data into dict_indi dictionary and dict_fam dictionary
@@ -89,15 +92,19 @@ def parse_GEDCOM(path):
                         date_b = 1
                     elif tag == 'MARR':
                         date_b = 2
+                    elif tag == 'DEAT':
+                        date_b = 3
+                    elif tag == 'DIV':
+                        date_b = 4
                     elif date_b == 1:
                         if tag == 'DATE':
                             """ date_b == 1 which means it is birth date """
-                            line_BIRTH = line_num
-                            list.append(['BIRTH', argument, line_BIRTH])
+                            line_birth = line_num
+                            list.append(['BIRTH', argument, line_birth])
                         else:
-                            line_BIRTH = line_num - 1
+                            line_birth = line_num - 1
 
-                            list.append(['BIRTH', '', line_BIRTH])
+                            list.append(['BIRTH', '', line_birth])
                             list.append([tag, argument, line_num])
                         date_b = 0
                     elif date_b == 2:
@@ -106,6 +113,25 @@ def parse_GEDCOM(path):
                             list.append(['MARR', argument, line_num])
                         else:
                             list.append(['MARR', '', line_num - 1])
+                            list.append([tag, argument, line_num])
+                        date_b = 0
+                    elif date_b == 3:
+                        if tag == 'DATE':
+                            """ date_b == 3 which means it is death date """
+                            line_death = line_num
+                            list.append(['DEAT', argument, line_death])
+                        else:
+                            line_death = line_num - 1
+
+                            list.append(['DEAT', '', line_death])
+                            list.append([tag, argument, line_num])
+                        date_b = 0
+                    elif date_b == 4:
+                        if tag == 'DATE':
+                            """ date_b == 4 which means it is divorced date"""
+                            list.append(['DIV', argument, line_num])
+                        else:
+                            list.append(['DIV', '', line_num - 1])
                             list.append([tag, argument, line_num])
                         date_b = 0
                     else:
@@ -165,6 +191,9 @@ def build_dictionary(sum):
             """ put feat_FAM into the result dictionary dict_fam """
 
     if len(dict_indi) < 5000 and len(dict_fam) < 1000:
+        indi_list = build_individual(dict_indi)
+        fam_list = build_family(dict_fam)
+        verification(indi_list, fam_list)
         return dict_indi, dict_fam
     else:
         raise ValueError(f"Data overflow")
@@ -172,7 +201,7 @@ def build_dictionary(sum):
 
 def main():
     path = r"/Users/zituoyan/Documents/GitHub/SSW555AP2020s/test03.ged"
-    print(parse_GEDCOM(path))
+    print(parse_gedcom(path))
 
 
 if __name__ == '__main__':

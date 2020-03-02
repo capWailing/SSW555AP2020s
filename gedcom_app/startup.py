@@ -3,7 +3,7 @@
     description: Start application
     date:21/02/2020
 """
-from gedcom_app.parser import parse_gedcom
+from gedcom_app.control.parser import parse_gedcom
 
 
 def main():
