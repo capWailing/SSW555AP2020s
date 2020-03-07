@@ -110,13 +110,13 @@ class Individual:
         return self.__error_list
 
     @error_list.setter
-    def error_list(self, error_list):
+    def error_list(self, error):
         """
             set error list
-        :param error_list:
+        :param error:
         :return:
         """
-        self.__error_list = error_list
+        self.__error_list.append(error)
 
     def __str__(self):
         return str({"INDI": self.__indi_id, "NAME": self.__name, "SEX": self.__gender,

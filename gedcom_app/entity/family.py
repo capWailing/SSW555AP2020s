@@ -91,13 +91,13 @@ class Family:
         return self.__error_list
 
     @error_list.setter
-    def error_list(self, error_list):
+    def error_list(self, error):
         """
             set error list
-        :param error_list:
+        :param error:
         :return:
         """
-        self.__error_list = error_list
+        self.__error_list.append(error)
 
     def __str__(self):
         return str({"FAM": self.__id, "MARR": self.__married, "DIV": self.__divorced,

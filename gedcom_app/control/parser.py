@@ -7,6 +7,7 @@ from collections import defaultdict
 
 from gedcom_app.control.build_entity import build_individual, build_family
 from gedcom_app.control.verification import verification
+from gedcom_app.view.output_errors import output_errors_indi, output_errors_fam
 from gedcom_app.view.output_prettytable import individual_table, family_table
 
 
@@ -197,6 +198,8 @@ def build_dictionary(sum):
         individual_table(indi_list)
         family_table(fam_list)
         verification(indi_list, fam_list)
+        output_errors_indi(indi_list)
+        output_errors_fam(fam_list)
         return dict_indi, dict_fam
     else:
         raise ValueError(f"Data overflow")
