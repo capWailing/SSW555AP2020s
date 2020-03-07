@@ -1,2 +1,0 @@
-[SQLite]
-path = GEDCOM.db    # path of database
