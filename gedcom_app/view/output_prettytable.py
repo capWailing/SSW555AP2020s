@@ -23,7 +23,8 @@ def family_table(fam):
                              'Husband Name', 'Wife ID', 'Wife Name', 'Children'])
     for family in fam.values():
         table_fam.add_row([family.id[0], family.married[0],
-                           family.divorced[0] if family.divorced !="N/A" else family.divorced,
+                           family.divorced[0] if family.divorced != "N/A" else family.divorced,
                            family.husband[0].indi_id[0], family.husband[0].name[0], family.wife[0].indi_id[0],
-                           family.wife[0].name[0], [child.indi_id[0] for child in family.children]])
+                           family.wife[0].name[0], [child.indi_id[0] for child in family.children]
+                           if len(family.children) != 0 else "N/A"])
     print(table_fam)
