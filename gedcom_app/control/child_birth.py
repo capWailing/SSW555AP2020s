@@ -28,18 +28,18 @@ def birth_before_marriage(fam):
                 "error_line": self.__error_info[3],
                 "entity_id": self.__error_info[4]}
                 """
-                new_error = GedcomError(("ANMALY", "FAMILY", "US08", bir_line, key),
+                new_error = GedcomError(("ANOMALY", "FAMILY", "US08", bir_line, key),
                                         f"Child {child_id} born {birth} before marriage on {marr_date}")
                 family.error_list = new_error
             elif if_div and birth > div_date + timedelta(days=270):
-                new_error = GedcomError(("ANMALY", "FAMILY", "US08", bir_line, key),
+                new_error = GedcomError(("ANOMALY", "FAMILY", "US08", bir_line, key),
                                         f"Child {child_id} born {birth} after divorce on {div_date}")
                 family.error_list = new_error
 
             if family.wife[0].death != "N/A":
                 mom_death = datetime.strptime(family.wife[0].death[0], "%d %b %Y")
                 if birth > mom_death:
-                    new_error = GedcomError(("ANMALY", "FAMILY", "US09", bir_line, key),
+                    new_error = GedcomError(("ANOMALY", "FAMILY", "US09", bir_line, key),
                                             f"Child {child_id} born {birth} after mother's death on {mom_death}")
                     family.error_list = new_error
                     print(f"ANOMALY: FAMILY: US09: {bir_line}: {key}: "
@@ -48,7 +48,7 @@ def birth_before_marriage(fam):
             if family.husband[0].death != "N/A":
                 dad_death = datetime.strptime(family.husband[0].death[0], "%d %b %Y")
                 if birth > dad_death + timedelta(days=270):
-                    new_error = GedcomError(("ANMALY", "FAMILY", "US09", bir_line, key),
+                    new_error = GedcomError(("ANOMALY", "FAMILY", "US09", bir_line, key),
                                             f"Child {child_id} born {birth} after daddy's death on {dad_death}")
                     family.error_list = new_error
 
