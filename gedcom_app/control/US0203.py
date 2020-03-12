@@ -9,7 +9,6 @@ from gedcom_app.errors.gedcom_error import GedcomError
 
 
 def birth_b_marriage_us02(fam):
-
     """ US02: birth before marriage"""
     for key, value in fam.items():
 
@@ -57,9 +56,5 @@ def birth_b_death_us03(indi):
 
         else:
             continue
-
-
-
-
 
 

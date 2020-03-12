@@ -5,11 +5,6 @@
 """
 from collections import defaultdict
 
-from gedcom_app.control.build_entity import build_individual, build_family
-from gedcom_app.control.verification import verification
-from gedcom_app.view.output_errors import output_errors_indi, output_errors_fam
-from gedcom_app.view.output_prettytable import individual_table, family_table
-
 
 def parse_gedcom(path):
     """
@@ -193,13 +188,6 @@ def build_dictionary(sum):
             """ put feat_FAM into the result dictionary dict_fam """
 
     if len(dict_indi) < 5000 and len(dict_fam) < 1000:
-        indi_list = build_individual(dict_indi)
-        fam_list = build_family(dict_fam, indi_list)
-        individual_table(indi_list)
-        family_table(fam_list)
-        verification(indi_list, fam_list)
-        output_errors_indi(indi_list)
-        output_errors_fam(fam_list)
         return dict_indi, dict_fam
     else:
         raise ValueError(f"Data overflow")

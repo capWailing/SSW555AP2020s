@@ -9,8 +9,8 @@ from gedcom_app.errors.gedcom_error import GedcomError
 
 
 def parents_not_too_old_us12(fam):
+    """ US12: parents_not_too_old"""
     for key, value in fam.items():
-
         if value.children == ['N/A']:
             continue
         else:
@@ -50,6 +50,7 @@ def parents_not_too_old_us12(fam):
 
 
 def no_marriage_to_children_us17(fam):
+    """ US17: no_marriage_to_children"""
     dict_h = defaultdict(lambda: 'N/A')
     dict_w = defaultdict(lambda: 'N/A')
     for key, value in fam.items():

@@ -21,7 +21,6 @@ def build_individual(indi):
 def build_family(fam, indi_dict):
     fam_dict = defaultdict(Family)
     for family in fam:
-        print(family)
         new_fam = Family(family["FAM"], family["MARR"], family["DIV"],
                          # add husband into family dictionary as an individual class
                          # which search from individual dictionary
