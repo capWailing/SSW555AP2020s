@@ -44,3 +44,15 @@ class GedcomError:
         :return: error_message
         """
         return self.__error_message
+
+    def __str__(self):
+        return f"{self.error_info['error_type']}: {self.error_info['indi_or_fam']}: \
+{self.error_info['user_story']}: {self.error_info['error_line']}: \
+{self.error_info['entity_id']}: {self.error_message}"
+
+    def __eq__(self, other):
+        if isinstance(other, str):
+            return True if self.__str__ == other else False
+        shared_items = {k: self.error_info[k] for k in self.error_info
+                        if k in other.error_info and self.error_info[k] == other.error_info[k]}
+        return True if shared_items == 5 and self.error_message == other.error_info else False
