@@ -9,14 +9,14 @@ from gedcom_app.errors.gedcom_error import GedcomError
 
 
 def sibi_not_marry(fam):
-    fami={}
+    fami = {}
 
     for key, family in fam.items():
         husband = family.husband[0]
         wife = family.wife[0]
 
         if husband.child != 'N/A' and wife.child != 'N/A':
-            fami[key] = {'hus_fam': [], 'wife_fam': [], 'hus_par': set(), 'wife_par': set(), 'lines': family.id[1]}
+            fami[key] = {'hus_fam': [], 'wife_fam': [], 'hus_par': set(), 'wife_par': set(), 'family': family}
             for i in husband.child:
                 fami[key]['hus_fam'].append(i[0])
 
@@ -42,15 +42,8 @@ def sibi_not_marry(fam):
 
             if num in value['hus_par']:
                 iserror=1
-                new_error = GedcomError(("ANOMALY", "FAMILY", "US18", value['lines'], key),
+                new_error = GedcomError(("ANOMALY", "FAMILY", "US18", value['family'].id[1], key),
                                         f"Siblings should not marry one another")
-                family.error_list = new_error
+                value['family'].error_list = new_error
 
                 break
-
-
-
-
-
-
-

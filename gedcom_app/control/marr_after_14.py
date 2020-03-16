@@ -30,9 +30,3 @@ def marry_after_14(fam):
                                     f"Child {wife_id.indi_id[0]}'s marry date is {marr_date},"
                                     f"less than 14 years after {wife_birth} ")
             family.error_list = new_error
-
-
-
-
-
-
