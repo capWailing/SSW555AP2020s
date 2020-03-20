@@ -180,8 +180,8 @@ def parse_GEDCOM(path):
 if __name__ == "__main__":
     """ 
     main() function: input path, print two tables
-    if data lost, it will display '' in table
-    if no record of items, it will display'N/A'
+    if data lost, it will view '' in table
+    if no record of items, it will view'N/A'
     """
     path = input("please input the .ged file path:")
     try:
