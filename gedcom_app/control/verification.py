@@ -11,6 +11,8 @@ from gedcom_app.control.US1217 import parents_not_too_old_us12, no_marriage_to_c
 from gedcom_app.control.sibi_not_marry import sibi_not_marry
 from gedcom_app.control.marr_after_14 import marry_after_14
 from gedcom_app.control.us0106 import date_before_current, div_before_death
+from gedcom_app.control.US0405 import USO4, US05
+from gedcom_app.control.US11 import US11
 
 
 def verification(indi_dict, fam_dict):
@@ -26,3 +28,6 @@ def verification(indi_dict, fam_dict):
     marry_after_14(fam_dict)
     date_before_current(indi_dict, fam_dict)
     div_before_death(fam_dict)
+    USO4(fam_dict)
+    US05(fam_dict)
+    US11(indi_dict, fam_dict)
