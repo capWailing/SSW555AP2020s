@@ -17,7 +17,8 @@ class TestUS0203(TestCase):
         test US03: birth before death
     """
     def test_birth_b_marriage_us02(self):
-        family_dict = build_family_list()
+        path = r"..\..\test.ged"
+        family_dict = build_family_list(path)
         birth_b_marriage_us02(family_dict)
         self.assertEqual([str(error) for error in family_dict['F2'].error_list],
                          ["ERROR: FAMILY: US02: 26: F2:  "

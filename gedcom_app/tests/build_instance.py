@@ -9,10 +9,10 @@ from gedcom_app.control.parser import parse_gedcom
 PATH = r"..\..\test.ged"
 
 
-def build_individual_list():
-    return build_individual(parse_gedcom(PATH)[0])
+def build_individual_list(path):
+    return build_individual(parse_gedcom(path)[0])
 
 
-def build_family_list():
-    result = parse_gedcom(PATH)[1]
-    return build_family(result, build_individual_list())
+def build_family_list(path):
+    result = parse_gedcom(path)[1]
+    return build_family(result, build_individual_list(path))
