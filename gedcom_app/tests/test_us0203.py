@@ -28,7 +28,7 @@ class TestUS0203(TestCase):
                          ["ERROR: FAMILY: US02: 26: F3:  "
                           "wife I04 birthday 4 May 2022 isn't before married date 5 JAN 1992"])
 
-    def birth_b_death_us03(self):
+    def test_birth_b_death_us03(self):
         indi_dict = build_individual_list(path)
         birth_b_death_us03(indi_dict)
         self.assertEqual([str(error) for error in indi_dict['I01'].error_list],
