@@ -3,12 +3,14 @@ import unittest
 from gedcom_app.control.US11 import US11
 from gedcom_app.tests.build_instance import build_family_list, build_individual_list
 
+path = r"..\..\test040511.ged"
+
 
 class Test(TestCase):
 
     def test_US11(self):
-        individual_dict = build_individual_list()
-        family_dict = build_family_list()
+        individual_dict = build_individual_list(path)
+        family_dict = build_family_list(path)
         US11(individual_dict, family_dict)
 
         self.assertEqual([str(error) for error in individual_dict['I04'].error_list],
