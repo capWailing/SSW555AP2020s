@@ -31,7 +31,7 @@ class TestUS0203(TestCase):
         indi_dict = build_individual_list(path)
         birth_b_death_us03(indi_dict)
         self.assertEqual([str(error) for error in indi_dict['I01'].error_list],
-                         ["ERROR: INDIVITUAL: US03: 5: I01: "
+                         ["ERROR: INDIVIDUAL: US03: 5: I01: "
                           "I01's birthday 5 JUL 1950 isn't before death date 31 DEC 1949"])
 
 
