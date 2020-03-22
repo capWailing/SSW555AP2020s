@@ -6,7 +6,7 @@
 from gedcom_app.control.build_entity import build_individual, build_family
 from gedcom_app.control.parser import parse_gedcom
 
-PATH = r"..\..\test.ged"
+PATH = r"/Users/huangxiaoqiang/PycharmProjects/gedcom_app/control/test_US0405.ged"
 
 
 def build_individual_list():
