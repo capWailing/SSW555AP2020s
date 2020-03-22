@@ -17,20 +17,24 @@ def output_errors_fam(fam):
     :param fam:
     :return:
     """
+    fam_err=[]
     for family in fam.values():
         error_list = family.error_list
         if len(error_list) != 0:
             for error in error_list:
-                print(f"{error.error_info['error_type']}: {error.error_info['indi_or_fam']}: "
+                fam_err.append(f"{error.error_info['error_type']}: {error.error_info['indi_or_fam']}: "
                       f"{error.error_info['user_story']}: {error.error_info['error_line']}: "
                       f"{error.error_info['entity_id']}: {error.error_message}")
+    return fam_err
 
 
 def output_errors_indi(indi):
+    indi_err=[]
     for indi in indi.values():
         error_list = indi.error_list
         if len(error_list) != 0:
             for error in error_list:
-                print(f"{error.error_info['error_type']}: {error.error_info['indi_or_fam']}: "
+                indi_err.append(f"{error.error_info['error_type']}: {error.error_info['indi_or_fam']}: "
                       f"{error.error_info['user_story']}: {error.error_info['error_line']}: "
                       f"{error.error_info['entity_id']}: {error.error_message}")
+    return indi_err
