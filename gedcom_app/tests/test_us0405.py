@@ -11,14 +11,14 @@ class Test(TestCase):
     def test_US04(self):
         family_dict = build_family_list(path)
         USO4(family_dict)
-        self.assertEqual([str(error) for error in family_dict['F1'].error_list],
-                         ['Error: FAMILY: US04: 55: F1: Divorced 18 May 1888 before married 17 FEB 1966'])
+        self.assertEqual([str(error) for error in family_dict['104F1'].error_list],
+                         ['Error: FAMILY: US04: 55: 104F1: Divorced 18 May 1888 before married 17 FEB 1966'])
 
     def test_US05(self):
         family_dict = build_family_list(path)
         US05(family_dict)
-        self.assertEqual([str(error) for error in family_dict['F3'].error_list],
-                         ["Error: FAMILY: US05: 70: F3: Married 5 JAN 1992 after husband's (I07) death on 11 DEC 1991"])
+        self.assertEqual([str(error) for error in family_dict['104F3'].error_list],
+                         ["Error: FAMILY: US05: 70: 104F3: Married 5 JAN 1992 after husband's (004I07) death on 11 DEC 1991"])
 
 
 if __name__ == "__main__":

@@ -13,8 +13,8 @@ class Test(TestCase):
         family_dict = build_family_list(path)
         US11(individual_dict, family_dict)
 
-        self.assertEqual([str(error) for error in individual_dict['I04'].error_list],
-                         ['Error: INDIVIDUAL: US11: 61: I04: bigamy happened on family F2 and family F3'])
+        self.assertEqual([str(error) for error in individual_dict['004I04'].error_list],
+                         ['Error: INDIVIDUAL: US11: 61: 004I04: bigamy happened on family 104F2 and family 104F3'])
 
 
 if __name__ == "__main__":
