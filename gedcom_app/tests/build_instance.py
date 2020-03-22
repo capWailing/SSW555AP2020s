@@ -14,5 +14,5 @@ def build_individual_list(path):
 
 
 def build_family_list(path):
-    result = parse_gedcom(path)
-    return build_family(result[1], build_individual_list(path))
+    result = parse_gedcom(path)[1]
+    return build_family(result, build_individual_list(path))
