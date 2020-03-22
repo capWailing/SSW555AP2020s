@@ -42,4 +42,3 @@ def US11(indi, fam):
 
         else:
             continue
-
