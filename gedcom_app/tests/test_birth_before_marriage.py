@@ -2,7 +2,7 @@ from unittest import TestCase
 from gedcom_app.control.child_birth import birth_before_marriage
 from gedcom_app.tests.build_instance import build_family_list
 
-path = r"..\..\test.ged"
+path = r"..\..\test0809.ged"
 
 
 class TestBirthBeforeMarriage(TestCase):

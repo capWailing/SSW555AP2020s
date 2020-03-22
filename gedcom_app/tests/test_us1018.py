@@ -7,7 +7,7 @@ from gedcom_app.tests.build_instance import build_family_list
 class TestUS1018(TestCase):
 
     def test_marry_after_14(self):
-        path = r"C:\Users\wangd\PycharmProjects\SSW555AP2020s\test1.ged"
+        path = r"..\..\test1.ged"
         family_dict = build_family_list(path)
         marry_after_14(family_dict)
 
@@ -16,7 +16,7 @@ class TestUS1018(TestCase):
                           "less than 14 years after 1990-05-04 00:00:00 "])
 
     def test_sibi_not_marry(self):
-        path = r"C:\Users\wangd\PycharmProjects\SSW555AP2020s\test1.ged"
+        path = r"..\..\test1.ged"
         family_dict = build_family_list(path)
         sibi_not_marry(family_dict)
 

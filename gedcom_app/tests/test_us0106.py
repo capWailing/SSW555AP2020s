@@ -6,7 +6,7 @@ from gedcom_app.tests.build_instance import build_family_list,build_individual_l
 class TestUS1018(TestCase):
 
     def test_div_before_death(self):
-        path = r"C:\Users\wangd\PycharmProjects\SSW555AP2020s\test.ged"
+        path = r"..\..\test.ged"
         family_dict = build_family_list(path)
         div_before_death(family_dict)
 
@@ -15,7 +15,7 @@ class TestUS1018(TestCase):
                           "after husband's death 1949-12-31 00:00:00"])
 
     def test_date_before_current(self):
-        path = r"C:\Users\wangd\PycharmProjects\SSW555AP2020s\test.ged"
+        path = r"..\..\test.ged"
         family_dict = build_family_list(path)
         indi_dict=build_individual_list(path)
         date_before_current(indi_dict,family_dict)
