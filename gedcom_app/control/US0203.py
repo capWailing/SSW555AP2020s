@@ -50,7 +50,7 @@ def birth_b_death_us03(indi):
 
         if birth_date >= death_date:
 
-            new_error = GedcomError(("ERROR", "INDIVITUAL", "US03", birth[1], key),
+            new_error = GedcomError(("ERROR", "INDIVIDUAL", "US03", birth[1], key),
                                     f"{key}'s birthday {birth[0]} isn't before death date {death[0]}")
             value.error_list = new_error
 
