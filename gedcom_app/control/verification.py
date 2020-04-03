@@ -13,6 +13,7 @@ from gedcom_app.control.marr_after_14 import marry_after_14
 from gedcom_app.control.us0106 import date_before_current, div_before_death
 from gedcom_app.control.US0405 import USO4, US05
 from gedcom_app.control.US11 import US11
+from gedcom_app.control.US2527 import unique_first_names_in_families_us25
 
 
 def verification(indi_dict, fam_dict):
@@ -31,3 +32,5 @@ def verification(indi_dict, fam_dict):
     USO4(fam_dict)
     US05(fam_dict)
     US11(indi_dict, fam_dict)
+    unique_first_names_in_families_us25(fam_dict)
+

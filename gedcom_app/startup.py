@@ -19,7 +19,7 @@ def main():
     dict_indi, dict_fam = parse_gedcom(path)
     indi_list = build_individual(dict_indi)
     fam_list = build_family(dict_fam, indi_list)
-    individual_table(indi_list)
+    print(individual_table(indi_list))
     family_table(fam_list)
     verification(indi_list, fam_list)
     output_errors_indi(indi_list)
