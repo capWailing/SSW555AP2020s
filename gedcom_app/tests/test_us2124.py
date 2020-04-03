@@ -3,7 +3,7 @@ from gedcom_app.control.US2124 import corrent_gender_us21,unique_family
 from gedcom_app.tests.build_instance import build_family_list
 
 
-class TestUS1018(TestCase):
+class TestUS2127(TestCase):
 
     def test_corrent_gender_us21(self):
         path = r"..\..\test2124.ged"

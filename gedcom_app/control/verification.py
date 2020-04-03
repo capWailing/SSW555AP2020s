@@ -31,6 +31,6 @@ def verification(indi_dict, fam_dict):
     div_before_death(fam_dict)
     USO4(fam_dict)
     US05(fam_dict)
-#    US11(indi_dict, fam_dict)
+    US11(indi_dict, fam_dict)
     corrent_gender_us21(fam_dict)
     unique_family(fam_dict)
