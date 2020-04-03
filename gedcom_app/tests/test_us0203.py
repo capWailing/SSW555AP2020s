@@ -12,6 +12,9 @@ from gedcom_app.tests.build_instance import build_family_list, build_individual_
 
 path = r"..\..\test.ged"
 
+path = r"..\..\test.ged"
+
+
 class TestUS0203(TestCase):
     """
         test US02: birth before marriage
