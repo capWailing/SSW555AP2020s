@@ -2,12 +2,13 @@ from unittest import TestCase
 from gedcom_app.control.child_birth import birth_before_marriage
 from gedcom_app.tests.build_instance import build_family_list
 
+path = r"..\..\test0809.ged"
+
 
 class TestBirthBeforeMarriage(TestCase):
     def test_birth_before_marriage(self):
-        family_dict = build_family_list()
+        family_dict = build_family_list(path)
         birth_before_marriage(family_dict)
-        print(family_dict)
         self.assertEqual([str(error) for error in family_dict['F1'].error_list],
                          ["ANOMALY: FAMILY: US08: 19: F1: Child I03 born "
                           "1968-06-05 00:00:00 before marriage on 2001-02-17 00:00:00",
