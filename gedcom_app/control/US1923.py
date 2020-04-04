@@ -51,7 +51,7 @@ def first_cousin_should_not_marry_us19(fam):
             continue
 
 
-def unique_date_and_birthday_us23(indi):
+def unique_name_and_birthday_us23(indi):
     lis_individual = []
     for key, value in indi.items():
         name = value.name
