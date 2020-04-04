@@ -5,11 +5,13 @@
 """
 from collections import defaultdict
 
+from gedcom_app.control.US22 import unique_indi_id, unique_fam_id
 from gedcom_app.entity.individual import Individual
 from gedcom_app.entity.family import Family
 
 
 def build_individual(indi):
+    unique_indi_id(indi)
     indi_dict = defaultdict(Individual)
     for people in indi:
         new_indi = Individual(people["INDI"], people["NAME"], people["SEX"],
@@ -19,6 +21,7 @@ def build_individual(indi):
 
 
 def build_family(fam, indi_dict):
+    unique_fam_id(fam)
     fam_dict = defaultdict(Family)
     for family in fam:
         new_fam = Family(family["FAM"], family["MARR"], family["DIV"],
