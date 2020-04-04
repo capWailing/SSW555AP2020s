@@ -7,16 +7,48 @@ from gedcom_app.errors.gedcom_error import GedcomError
 
 
 def first_cousin_should_not_marry_us19(fam):
-    grandchildren_list = []
+    grandparents_family_id_lis = []
     for key, value in fam.items():
-        if len(value.children) >= 2:
-            for children in value.children:
-                children_child_ = children.child
-                for children_child_id in range(len(children_child_id)):
-                    grandchildren_list.append(indi.children_child_id)
+        hus_id = value.husband[0]
+        wif_id = value.wife[0]
+        hus_family = hus_id.child
+        wif_family = wif_id.child
 
+        if hus_family not in ['N/A', ''] and wif_family not in ['N/A', '']:
+            for family_hus in hus_family:
+                family1 = fam.get(family_hus[0])
+                husband_father_id = family1.husband[0]
+                husband_mother_id = family1.wife[0]
+                father_child = husband_father_id.child
+                mother_child = husband_mother_id.child
+                for child in father_child:
+                    if father_child not in ['N/A', '']:
+                        grandparents_family_id_lis.append(child[0])
+                for child in mother_child:
+                    if mother_child not in ['N/A', '']:
+                        grandparents_family_id_lis.append(child[0])
 
-                print(children_child_id)
+            for family_wif in wif_family:
+                family2 = fam.get(family_wif[0])
+                wife_father_id = family2.husband[0]
+                wife_mother_id = family2.wife[0]
+                father_child = wife_father_id.child
+                mother_child = wife_mother_id.child
+                for child in father_child:
+                    if father_child not in ['N/A', '']:
+                        grandparents_family_id_lis.append(child[0])
+                for child in mother_child:
+                    if mother_child not in ['N/A', '']:
+                        grandparents_family_id_lis.append(child[0])
+
+            if len(grandparents_family_id_lis) == set(grandparents_family_id_lis):
+                grandparents_family_id_lis = []
+            else:
+                new_error = GedcomError(("Error", "FAMILY", "US19", value.id[1], key),
+                                        f"First cousins marry one another happened in family {value.id[0]}")
+                value.error_list = new_error
+        else:
+            continue
 
 
 def unique_date_and_birthday_us23(indi):

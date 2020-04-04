@@ -23,7 +23,7 @@ def verification(indi_dict, fam_dict):
     birth_before_marriage(fam_dict)
     birth_b_marriage_us02(fam_dict)
     birth_b_death_us03(indi_dict)
-    #parents_not_too_old_us12(fam_dict)
+    parents_not_too_old_us12(fam_dict)
     no_marriage_to_children_us17(fam_dict)
     sibi_not_marry(fam_dict)
     marry_after_14(fam_dict)

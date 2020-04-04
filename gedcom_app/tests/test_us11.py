@@ -3,7 +3,7 @@ import unittest
 from gedcom_app.control.US11 import US11
 from gedcom_app.tests.build_instance import build_family_list, build_individual_list
 
-path = r"..\..\test040511.ged"
+path = r"..\..\test(4 5 11 19 23).ged"
 
 
 class Test(TestCase):
