@@ -14,7 +14,7 @@ class TestUS2127(TestCase):
                          ["ANOMALY: FAMILY: US21: 37: F1211: husband's gender should be female",
                           "ANOMALY: FAMILY: US21: 38: F1211: wife's gender should be male"])
 
-    def test_sibi_not_marry(self):
+    def test_unique_family_24(self):
         path = r"..\..\test2124.ged"
         family_dict = build_family_list(path)
         unique_family_24(family_dict)
