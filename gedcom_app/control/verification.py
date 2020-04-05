@@ -16,6 +16,7 @@ from gedcom_app.control.US0405 import USO4, US05
 from gedcom_app.control.US11 import US11
 from gedcom_app.control.US2527 import unique_first_names_in_families_us25
 from gedcom_app.control.US2124 import corrent_gender_us21, unique_family_24
+from gedcom_app.control.US1923 import unique_name_and_birthday_us23, first_cousin_should_not_marry_us19
 
 
 def verification(indi_dict, fam_dict):
@@ -38,3 +39,6 @@ def verification(indi_dict, fam_dict):
     unique_family_24(fam_dict)
     multiple_siblings(fam_dict)
     unique_first_names_in_families_us25(fam_dict)
+    unique_name_and_birthday_us23(indi_dict)
+    first_cousin_should_not_marry_us19(fam_dict)
+
