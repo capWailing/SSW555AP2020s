@@ -28,7 +28,7 @@ def individual_table(indi):
             age = f"death age: {int(float(l_num_date[0]) / 365.25)}"
         table_indi.add_row([people.indi_id[0], people.name[0],
                            "Male" if people.gender[0] == "M" else "Female", people.birthday[0],
-                            people.alive, people.death if people.death == "N/A" else people.death,
+                            people.alive, people.death if people.death == "N/A" else people.death[0],
                             [c[0] for c in people.child] if people.child != "N/A" else people.child,
                             [s[0] for s in people.spouse] if people.spouse != "N/A" else people.spouse,
                             age])
