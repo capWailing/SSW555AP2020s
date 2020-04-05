@@ -57,17 +57,21 @@ def unique_name_and_birthday_us23(indi):
         name = value.name
         birthday = value.birthday
         lis_individual.append((name[0], birthday[0]))
+    print(lis_individual)
 
     set_individual = set(lis_individual)
+    print(set_individual)
+    print(len(lis_individual))
+    print(len(set_individual))
     if len(lis_individual) != len(set_individual):
         for item in set_individual:
             lis_individual.remove(item)
 
-    set_individual = set(lis_individual)
-    for i in set_individual:
-        for key, value in indi.items():
-            if value.name[0] == i[0]:
-                new_error = GedcomError(("Error", "INDIVIDUAL", "US23", value.name[1], key),
-                                        f"more than one individual with same name {value.name[0]} and birth date " +
-                                        f"{value.birthday[0]} appear in the GED file")
-                value.error_list = new_error
+        set_individual = set(lis_individual)
+        for i in set_individual:
+            for key, value in indi.items():
+                if value.name[0] == i[0]:
+                    new_error = GedcomError(("Error", "INDIVIDUAL", "US23", value.name[1], key),
+                                            f"more than one individual with same name {value.name[0]} and birth date " +
+                                            f"{value.birthday[0]} appear in the GED file")
+                    value.error_list = new_error
