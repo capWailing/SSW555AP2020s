@@ -29,8 +29,7 @@ class TestUS27(TestCase):
 
         self.assertEqual(tb.field_names,
                          ['ID', 'Name', 'Gender', 'Birthday', 'Alive', 'Death', 'Child', 'Spouse', 'Age'])
-        self.assertEqual(l_age, ['death age: 0', '69', '51', '-2', '25', '21', 'death age: 25', '16', 'death age: 60',
-                                 '77', 'death age: 0', '69', '51', '51', '51', '51', '51', '51', 'death age: 283',
+        self.assertEqual(l_age, ['death age: 0', '69', '51', '51', '51', '51', '51', '51', 'death age: 283',
                                  '69', '51', '-2', '25', '21', 'death age: 21', '47', '45', '22', '19', '17'])
 
 
