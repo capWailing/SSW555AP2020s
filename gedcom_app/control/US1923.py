@@ -57,12 +57,8 @@ def unique_name_and_birthday_us23(indi):
         name = value.name
         birthday = value.birthday
         lis_individual.append((name[0], birthday[0]))
-    print(lis_individual)
 
     set_individual = set(lis_individual)
-    print(set_individual)
-    print(len(lis_individual))
-    print(len(set_individual))
     if len(lis_individual) != len(set_individual):
         for item in set_individual:
             lis_individual.remove(item)
