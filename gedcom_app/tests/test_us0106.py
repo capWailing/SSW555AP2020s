@@ -3,7 +3,7 @@ from gedcom_app.control.us0106 import div_before_death,date_before_current
 from gedcom_app.tests.build_instance import build_family_list,build_individual_list
 
 
-class TestUS1018(TestCase):
+class TestUS0106(TestCase):
 
     def test_div_before_death(self):
         path = r"..\..\test.ged"

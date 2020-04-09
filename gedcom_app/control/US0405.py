@@ -53,7 +53,7 @@ def US05(fam):
             elif wif_death not in ('N/A', ''):
                 wif_death_date = datetime.strptime(wif_death[0], "%d %b %Y")
                 if wif_death_date < mar_date:
-                    new_error = GedcomError(("Error", "FAMILY", "US05", datetime[1], key),
+                    new_error = GedcomError(("Error", "FAMILY", "US05", date_married[1], key),
                                             f"Married {date_married[0]} after wife's ({wif_id.indi_id[0]}) death on {wif_death[0]}")
                     value.error_list = new_error
 

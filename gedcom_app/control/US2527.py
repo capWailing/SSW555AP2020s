@@ -38,7 +38,7 @@ def unique_first_names_in_families_us25(fam):
                     l_child = []
                     for n in range(0, len(value1), 2):
                         l_child.append(value1[n])
-                    new_error = GedcomError(("ERROR", "FAMILY", "US25", value1[1], key),
+                    new_error = GedcomError(("ANOMALY", "FAMILY", "US25", value1[1], key),
                                             f"children {l_child} of family {key} have the same first name '{name1}'")
                     value.error_list = new_error
                 else:
