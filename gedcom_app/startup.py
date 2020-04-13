@@ -9,6 +9,7 @@ from gedcom_app.view.output_errors import output_errors_indi, output_errors_fam
 from gedcom_app.view.output_prettytable import individual_table, family_table
 from gedcom_app.control.build_entity import build_individual, build_family
 from gedcom_app.control.verification import verification
+from gedcom_app.control.US2930 import listalldeceased,listlivemarried
 
 
 def main():
@@ -24,6 +25,10 @@ def main():
     verification(indi_list, fam_list)
     output_errors_indi(indi_list)
     output_errors_fam(fam_list)
+    for i in listlivemarried(fam_list):
+        print(i)
+    for i in listalldeceased(indi_list):
+        print(i)
 
 
 if __name__ == '__main__':

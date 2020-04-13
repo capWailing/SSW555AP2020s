@@ -40,5 +40,7 @@ def verification(indi_dict, fam_dict):
     multiple_siblings(fam_dict)
     unique_first_names_in_families_us25(fam_dict)
     unique_name_and_birthday_us23(indi_dict)
+
     first_cousin_should_not_marry_us19(fam_dict)
+
 
