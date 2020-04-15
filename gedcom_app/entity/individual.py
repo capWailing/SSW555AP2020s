@@ -10,7 +10,7 @@ class Individual:
     """
         individual entity class
     """
-    def __init__(self, indi_id, name, gender, birthday, death, child, spouse):
+    def __init__(self, indi_id, name, gender, birthday, death, child, spouse, age):
         """
             init individual instance
         :param indi_id: individual id
@@ -19,7 +19,8 @@ class Individual:
         :param birthday: birthday
         :param death: death date
         :param child: individual instance of child
-        :param spouse: list of individual instance of spouse
+        :param spouse: list of individual instance of
+        :param age: age
         """
         self.__indi_id = indi_id
         self.__name = name
@@ -29,6 +30,7 @@ class Individual:
         self.__child = child
         self.__spouse = spouse
         self.__alive = self.if_alive()
+        self.__age = age
         self.__error_list = []
 
     def if_alive(self):
@@ -102,6 +104,14 @@ class Individual:
         return self.__alive
 
     @property
+    def age(self):
+        """
+            individual age
+        :return: age
+        """
+        return self.__age
+
+    @property
     def error_list(self):
         """
             listed errors which are gedcom-errors
@@ -121,4 +131,4 @@ class Individual:
     def __str__(self):
         return str({"INDI": self.__indi_id, "NAME": self.__name, "SEX": self.__gender,
                 "BIRTH": self.__birthday, "DEAT": self.__death, "FAMC": self.__child,
-                "FAMS": self.__spouse})
+                "FAMS": self.__spouse, "AGE": self.__age})
