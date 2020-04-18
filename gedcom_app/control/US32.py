@@ -20,13 +20,9 @@ def list_multiple_birth_us32(fam):
             for child in value.children:
                 id_c = child.indi_id[0]
                 birth_c = child.birthday[0]
-                if dict[birth_c] == 'N/A':
-                    dict[birth_c] = [id_c]
-                else:
-                    l_tem = dict[birth_c]
-                    l_tem.append(id_c)
-                    dict[birth_c] = l_tem
-
+                l_tem = dict[birth_c]
+                l_tem.append(id_c)
+                dict[birth_c] = l_tem
             for item in dict.values():
                 if len(item) != 1:
                     l_multiple_birth.append(item)
