@@ -4,7 +4,6 @@
     date: 04/01/2020
 """
 from prettytable import PrettyTable
-from datetime import datetime
 
 
 def individual_table(indi):
@@ -15,23 +14,12 @@ def individual_table(indi):
     table_indi = PrettyTable(
         ['ID', 'Name', 'Gender', 'Birthday', 'Alive', 'Death', 'Child', 'Spouse', 'Age'])
     for people in indi.values():
-        indi_birth_date = datetime.strptime(people.birthday[0], "%d %b %Y")
-        current_date = datetime.now()
-        if people.death == "N/A":
-            num_date = current_date - indi_birth_date
-            l_num_date = str(num_date).split(' ')
-            age = int(float(l_num_date[0]) / 365.25)
-        else:
-            death_date = datetime.strptime(people.death[0], "%d %b %Y")
-            num_date = death_date - indi_birth_date
-            l_num_date = str(num_date).split(' ')
-            age = f"death age: {int(float(l_num_date[0]) / 365.25)}"
         table_indi.add_row([people.indi_id[0], people.name[0],
                            "Male" if people.gender[0] == "M" else "Female", people.birthday[0],
                             people.alive, people.death if people.death == "N/A" else people.death[0],
                             [c[0] for c in people.child] if people.child != "N/A" else people.child,
                             [s[0] for s in people.spouse] if people.spouse != "N/A" else people.spouse,
-                            age])
+                            people.age])
     return table_indi
 
 

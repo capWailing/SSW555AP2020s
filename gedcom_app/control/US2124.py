@@ -10,12 +10,12 @@ def corrent_gender_us21(fam):
 
         if husband.gender[0] == 'F':
             new_error = GedcomError(("ANOMALY", "FAMILY", "US21", family.husband[1], key),
-                                    f"husband's gender should be female")
+                                    f"husband's gender should be male")
             family.error_list = new_error
 
         if wife.gender[0] == 'M':
             new_error = GedcomError(("ANOMALY", "FAMILY", "US21", family.wife[1], key),
-                                    f"wife's gender should be male")
+                                    f"wife's gender should be female")
             family.error_list = new_error
 
 
