@@ -19,6 +19,7 @@ from gedcom_app.control.US2124 import corrent_gender_us21, unique_family_24
 from gedcom_app.control.US1923 import unique_name_and_birthday_us23, first_cousin_should_not_marry_us19
 from gedcom_app.control.US31 import list_living_single_us31_prettytable
 from gedcom_app.control.US32 import list_multiple_birth_us32_prettytable
+from gedcom_app.control.US3536 import pretty_table_recent_births, pretty_table_recent_death
 
 
 def verification(indi_dict, fam_dict):
@@ -45,4 +46,5 @@ def verification(indi_dict, fam_dict):
     first_cousin_should_not_marry_us19(fam_dict)
     list_living_single_us31_prettytable(indi_dict)
     list_multiple_birth_us32_prettytable(indi_dict, fam_dict)
-
+    pretty_table_recent_births(indi_dict)
+    pretty_table_recent_death(indi_dict)
