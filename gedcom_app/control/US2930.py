@@ -44,22 +44,28 @@ def US2930_prettytable(indi,fam):
     print all list living single person information in a prettytable
     """
     us29=listalldeceased(indi)
-    us29_prettytable = PrettyTable(['ID', 'Name', 'Gender', 'Birthday', 'Alive', 'Death', 'Child', 'Spouse', 'Age'])
-    print("US29:List all deceased individuals in a GEDCOM file")
-    for value in us29:
-         us29_prettytable.add_row([value.indi_id[0], value.name[0],
-                                "Male" if value.gender[0] == "M" else "Female", value.birthday[0],
-                                value.alive, value.death[0], [c[0] for c in value.child]
-                                if value.child != "N/A" else value.child, [c[0] for c in value.spouse]
-                                if value.spouse != "N/A" else value.spouse, value.age])
-    print(us29_prettytable)
+    if us29 == []:
+        next
+    else:
+        us29_prettytable = PrettyTable(['ID', 'Name', 'Gender', 'Birthday', 'Alive', 'Death', 'Child', 'Spouse', 'Age'])
+        print("US29:List all deceased individuals in a GEDCOM file")
+        for value in us29:
+             us29_prettytable.add_row([value.indi_id[0], value.name[0],
+                                    "Male" if value.gender[0] == "M" else "Female", value.birthday[0],
+                                    value.alive, value.death[0], [c[0] for c in value.child]
+                                    if value.child != "N/A" else value.child, [c[0] for c in value.spouse]
+                                    if value.spouse != "N/A" else value.spouse, value.age])
+        print(us29_prettytable)
 
     us30 = listlivemarried(fam)
-    us30_prettytable = PrettyTable(['ID', 'Name', 'Gender', 'Birthday', 'Alive', 'Death', 'Child', 'Spouse', 'Age'])
-    print("US30:List all living married people in a GEDCOM file")
-    for value in us30:
-        us30_prettytable.add_row([value.indi_id[0], value.name[0],
-                         "Male" if value.gender[0] == "M" else "Female", value.birthday[0],
-                        value.alive, "N/A", [c[0] for c in value.child]
-                        if value.child != "N/A" else value.child, [c[0] for c in value.spouse], value.age])
-    print(us30_prettytable)
+    if us30 == {}:
+        next
+    else:
+        us30_prettytable = PrettyTable(['ID', 'Name', 'Gender', 'Birthday', 'Alive', 'Death', 'Child', 'Spouse', 'Age'])
+        print("US30:List all living married people in a GEDCOM file")
+        for value in us30:
+            us30_prettytable.add_row([value.indi_id[0], value.name[0],
+                             "Male" if value.gender[0] == "M" else "Female", value.birthday[0],
+                            value.alive, "N/A", [c[0] for c in value.child]
+                            if value.child != "N/A" else value.child, [c[0] for c in value.spouse], value.age])
+        print(us30_prettytable)
