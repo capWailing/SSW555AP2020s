@@ -37,22 +37,23 @@ def list_multiple_birth_us32(fam):
 
 def list_multiple_birth_us32_prettytable(indi, fam):
     l = list_multiple_birth_us32(fam)
-    for item in l:
-        table_list_multiple_birth = PrettyTable(['ID', 'Name', 'Gender', 'Birthday', 'Alive', 'Death',
+    if l:
+        for item in l:
+            table_list_multiple_birth = PrettyTable(['ID', 'Name', 'Gender', 'Birthday', 'Alive', 'Death',
                                                  'Child', 'Spouse', 'Age'])
-        for id in item:
-            for key1, value1 in indi.items():
-                if key1 == id:
-                    table_list_multiple_birth.add_row([id, value1.name[0],"Male" if value1.gender[0] == "M" else "Female",
+            for id in item:
+                for key1, value1 in indi.items():
+                    if key1 == id:
+                        table_list_multiple_birth.add_row([id, value1.name[0],"Male" if value1.gender[0] == "M" else "Female",
                                                       value1.birthday[0], value1.alive,
                                                        value1.death if value1.death == "N/A" else value1.death[0],
                                                       [c[0] for c in value1.child] if value1.child != "N/A" else value1.child,
                                                       [s[0] for s in value1.spouse] if value1.spouse != "N/A" else value1.spouse,
                                                        value1.age])
-                else:
-                    continue
-        print("US32: list multiple birth")
-        print(table_list_multiple_birth)
+                    else:
+                        continue
+            print("US32: list multiple birth")
+            print(table_list_multiple_birth)
 
 
 
