@@ -28,9 +28,6 @@ def listlivemarried(indi):
 
 
 def US2930_prettytable(indi):
-    """
-    print all list living single person information in a prettytable
-    """
     us29=listalldeceased(indi)
     if us29 == []:
         next
