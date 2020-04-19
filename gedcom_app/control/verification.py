@@ -47,6 +47,6 @@ def verification(indi_dict, fam_dict):
     first_cousin_should_not_marry_us19(fam_dict)
     list_living_single_us31_prettytable(indi_dict)
     list_multiple_birth_us32_prettytable(indi_dict, fam_dict)
-    US2930_prettytable(indi_dict, fam_dict)
+    US2930_prettytable(indi_dict)
     pretty_table_recent_births(indi_dict)
     pretty_table_recent_death(indi_dict)

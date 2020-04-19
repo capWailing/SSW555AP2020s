@@ -16,30 +16,18 @@ def listalldeceased(indi):
 
 
 
-def listlivemarried(fam):
+def listlivemarried(indi):
 
     livemarried=set()
 
-    for key,value in fam.items():
+    for key,value in indi.items():
+        if value.death[0] in ['', 'N', 'N/A'] and value.spouse!='N/A':
 
-        husband = value.husband[0]
-        wife = value.wife[0]
-
-        if husband.death[0] in ['', 'N', 'N/A']:
-
-            livemarried.add(husband)
-
-        if wife.death[0] in ['', 'N', 'N/A']:
-
-            livemarried.add(wife)
-
-        else:
-            continue
-
+            livemarried.add(value)
     return livemarried
 
 
-def US2930_prettytable(indi,fam):
+def US2930_prettytable(indi):
     """
     print all list living single person information in a prettytable
     """
@@ -57,7 +45,7 @@ def US2930_prettytable(indi,fam):
                                     if value.spouse != "N/A" else value.spouse, value.age])
         print(us29_prettytable)
 
-    us30 = listlivemarried(fam)
+    us30 = listlivemarried(indi)
     if us30.__eq__(set()):
         next
     else:
