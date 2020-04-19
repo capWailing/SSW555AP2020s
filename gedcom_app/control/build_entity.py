@@ -7,7 +7,7 @@ from collections import defaultdict
 from gedcom_app.entity.individual import Individual
 from gedcom_app.entity.family import Family
 from gedcom_app.errors.gedcom_error import GedcomError
-
+from datetime import datetime
 
 def build_individual(indi):
     indi_dict = defaultdict(Individual)
@@ -17,8 +17,19 @@ def build_individual(indi):
                                     f"Individual ID {people['INDI'][0]} should be unique!")
             indi_dict[people["INDI"][0]].error_list = new_error
         else:
+            indi_birth_date = datetime.strptime(people["BIRTH"][0], "%d %b %Y")
+            current_date = datetime.now()
+            if people["DEAT"] == "N/A":
+                num_date = current_date - indi_birth_date
+                l_num_date = str(num_date).split(' ')
+                age = int(float(l_num_date[0]) / 365.25)
+            else:
+                death_date = datetime.strptime(people["DEAT"][0], "%d %b %Y")
+                num_date = death_date - indi_birth_date
+                l_num_date = str(num_date).split(' ')
+                age = f"death age: {int(float(l_num_date[0]) / 365.25)}"
             new_indi = Individual(people["INDI"], people["NAME"], people["SEX"],
-                                  people["BIRTH"], people["DEAT"], people["FAMC"], people["FAMS"])
+                                  people["BIRTH"], people["DEAT"], people["FAMC"], people["FAMS"], age)
             indi_dict[people["INDI"][0]] = new_indi
     return indi_dict
 
