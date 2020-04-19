@@ -4,6 +4,7 @@
     date: 3/2/2020
 """
 from gedcom_app.control.US15 import multiple_siblings
+from gedcom_app.control.US26 import indi_corresponding_in_family, family_corresponding_in_indi
 from gedcom_app.control.US38 import list_recent_birth_prettytable
 from gedcom_app.control.child_birth import birth_before_marriage
 from gedcom_app.control.us07 import less_than_150
@@ -52,3 +53,5 @@ def verification(indi_dict, fam_dict):
     pretty_table_recent_births(indi_dict)
     pretty_table_recent_death(indi_dict)
     list_recent_birth_prettytable(indi_dict)
+    indi_corresponding_in_family(indi_dict, fam_dict)
+    family_corresponding_in_indi(indi_dict, fam_dict)
