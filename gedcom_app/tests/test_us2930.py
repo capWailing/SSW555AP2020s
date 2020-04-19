@@ -4,7 +4,7 @@ from gedcom_app.control.US2930 import listalldeceased,listlivemarried
 from gedcom_app.tests.build_instance import build_family_list,build_individual_list
 
 
-class TestUS2127(TestCase):
+class TestUS2930(TestCase):
 
     def test_listalldeceased(self):
         path = r"..\..\test2930.ged"
