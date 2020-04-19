@@ -17,8 +17,8 @@ class TestUS2127(TestCase):
 
     def test_listlivemarried(self):
         path = r"..\..\test2930.ged"
-        family_dict = build_family_list(path)
-        livemarried=listlivemarried(family_dict)
+        indi_dict = build_individual_list(path)
+        livemarried=listlivemarried(indi_dict)
         list2=[[i.indi_id[0]] for i in livemarried]
         list2.sort()
         self.assertEqual(list2,[['I0292'],['I0293'],['I0294'],['I0295']])
