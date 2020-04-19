@@ -16,7 +16,7 @@ class TestUS38(TestCase):
     """
     US31:List living single
     """
-    def test_list_living_single_us31(self):
+    def test_List_upcoming_birthdays_us38(self):
         dict_indi, dict_fam = parse_gedcom(PATH)
         indi_list = build_individual(dict_indi)
         list_result = list_birthday_recent(indi_list)
