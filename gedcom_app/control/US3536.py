@@ -15,7 +15,7 @@ def recent_births(indi):
     for key, value in indi.items():
         birthday = datetime.datetime.strptime(value.birthday[0], "%d %b %Y")
         today_before_30 = datetime.datetime.today() - datetime.timedelta(days=30)
-        if today_before_30 < birthday:
+        if today_before_30 <= birthday <= datetime.datetime.today():
             recent_births_list.append(key)
         else:
             continue
@@ -33,10 +33,15 @@ def pretty_table_recent_births(indi):
             person = value
             for key1, value1 in indi.items():
                 if key1 == person:
-                    table_list_recent_births.add_row([person, value1.name[0],
-                                                      "Male" if value1.gender[0] == "M" else "Female", value1.birthday[0],
-                                                      value1.alive, "N/A", [c[0] for c in value1.child]
-                                                      if value1.child != "N/A" else value1.child, "N/A", value1.age])
+                    table_list_recent_births.add_row([person,
+                                                      value1.name[0],
+                                                      "Male" if value1.gender[0] == "M" else "Female",
+                                                      value1.birthday[0],
+                                                      value1.alive,
+                                                      value1.death if value1.death == 'N/A' else value1.death[0],
+                                                      [c[0] for c in value1.child]if value1.child != "N/A" else value1.child,
+                                                      [c[0] for c in value1.spouse]if value1.spouse != "N/A" else value1.spouse,
+                                                      value1.age])
         print(table_list_recent_births)
 
     else:
@@ -54,7 +59,7 @@ def recent_deaths(indi):
         else:
             death_date = datetime.datetime.strptime(value.death[0], "%d %b %Y")
             today_before_30 = datetime.datetime.today() - datetime.timedelta(days=30)
-            if today_before_30 < death_date:
+            if today_before_30 <= death_date <= datetime.datetime.today():
                 recent_death_list.append(key)
             else:
                 continue
@@ -71,10 +76,14 @@ def pretty_table_recent_death(indi):
             person = value
             for key1, value1 in indi.items():
                 if key1 == person:
-                    table_list_recent_death.add_row([person, value1.name[0],
+                    table_list_recent_death.add_row([person,
+                                                     value1.name[0],
                                                     "Male" if value1.gender[0] == "M" else "Female", value1.birthday[0],
-                                                     value1.alive, "N/A", [c[0] for c in value1.child]
-                                                     if value1.child != "N/A" else value1.child, "N/A", value1.age])
+                                                     value1.alive,
+                                                     value1.death if value1.death == 'N/A' else value1.death[0],
+                                                     [c[0] for c in value1.child] if value1.child != "N/A" else value1.child,
+                                                     [c[0] for c in value1.spouse]if value1.spouse != "N/A" else value1.spouse,
+                                                     value1.age])
         print(table_list_recent_death)
 
     else:
